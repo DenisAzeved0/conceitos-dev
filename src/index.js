@@ -2,14 +2,26 @@ const express = require('express');
 
 const app = express();
 
-app.get('/projects', (require, response) => {
+app.use(express.json());
+
+app.get('/projects', (request, response) => {
+  const { title, owner } = request.query;
+
+  console.log(title);
+  console.log(owner);
+
   return response.json([
     'Projeto 1',
     'Projeto 2',
   ]);
 });
 
-app.post('/projects', (require, response) => {
+app.post('/projects', (request, response) => {
+  const { title, owner } = request.body;
+
+  console.log(title);
+  console.log(owner);
+
   return response.json([
     'Projeto 1',
     'Projeto 2',
@@ -17,7 +29,11 @@ app.post('/projects', (require, response) => {
   ]);
 });
 
-app.put('/projects/:id', (require, response) => {
+app.put('/projects/:id', (request, response) => {
+  const { id } = request.params;
+
+  console.log(id);
+
   return response.json([
     'Projeto 4',
     'Projeto 2',
@@ -25,7 +41,7 @@ app.put('/projects/:id', (require, response) => {
   ]);
 });
 
-app.delete('/projects/:id', (require, response) => {
+app.delete('/projects/:id', (request, response) => {
   return response.json([
     'Projeto 2',
     'Projeto 3',
